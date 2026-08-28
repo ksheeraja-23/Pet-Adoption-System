@@ -1,0 +1,39 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>PawsHome — Admin</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body class="page-admin">
+  <nav>
+    <div class="nav-inner container">
+      <div class="brand"><div class="logo">🛡️</div><h1>PawsHome Admin</h1></div>
+      <div class="nav-links">
+        <a href="index.html" class="btn">Back to site</a>
+      </div>
+    </div>
+  </nav>
+
+  <main class="container">
+    <div style="max-width:900px;margin:30px auto">
+      <div class="card p-8">
+        <h2>Admin Dashboard</h2>
+        <form id="admin-login-form" style="margin-top:12px">
+          <div class="form-group">
+            <label>Admin password</label>
+            <input id="admin-password" class="input" type="password" placeholder="(hint: admin)">
+          </div>
+          <div style="display:flex;gap:8px;justify-content:flex-end">
+            <button class="btn btn-primary">Enter Admin</button>
+          </div>
+        </form>
+
+        <div id="admin-area" style="margin-top:18px"></div>
+      </div>
+    </div>
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>

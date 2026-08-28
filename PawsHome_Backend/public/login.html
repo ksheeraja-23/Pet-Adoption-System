@@ -1,0 +1,133 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>PawsHome — Login</title>
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    /* Optional: lightweight form polish */
+    body {
+      font-family: system-ui, sans-serif;
+      background: #fafafa;
+    }
+    .center-card {
+      max-width: 480px;
+      margin: 60px auto;
+    }
+    .toast {
+      position: fixed;
+      bottom: 24px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: #333;
+      color: #fff;
+      padding: 12px 24px;
+      border-radius: 8px;
+      opacity: 0;
+      transition: opacity 0.3s ease;
+      pointer-events: none;
+    }
+    .toast.show { opacity: 1; }
+  </style>
+</head>
+<body class="page-login">
+
+  <!-- ✅ Navigation Bar -->
+  <nav>
+    <div class="nav-inner container">
+      <div class="brand">
+        <div class="logo">🐾</div>
+        <h1>PawsHome</h1>
+      </div>
+      <div class="nav-links">
+        <a href="index.html" class="btn">Home</a>
+        <a href="register.html" class="btn">Create Account</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- ✅ Login Form -->
+  <main class="container">
+    <div class="center-card">
+      <div class="card p-8">
+        <h2>Welcome Back! 🐾</h2>
+        <form id="login-form" style="margin-top:20px">
+          <div class="form-group">
+            <label for="login-email">Email</label>
+            <input id="login-email" class="input" type="email" placeholder="you@email.com" required />
+          </div>
+          <div class="form-group">
+            <label for="login-password">Password</label>
+            <input id="login-password" class="input" type="password" placeholder="••••••••" disabled style="background:#eee;cursor:not-allowed" />
+            <small class="text-muted">Password not required for now — login with email only.</small>
+          </div>
+          <div style="display:flex;justify-content:flex-end;margin-top:12px">
+            <button type="submit" class="btn btn-primary">✨ Sign In</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </main>
+
+  <!-- ✅ Toast Notification -->
+  <div id="site-toast" class="toast"></div>
+
+  <!-- ✅ Main Script -->
+  <script>
+    const API_BASE = "http://localhost:3000/api";
+
+    function qs(sel, root = document) { return root.querySelector(sel); }
+    function toast(msg, timeout = 2600) {
+      const t = qs('#site-toast');
+      t.textContent = msg;
+      t.classList.add('show');
+      setTimeout(() => t.classList.remove('show'), timeout);
+    }
+
+    async function initLoginPage() {
+      const form = qs("#login-form");
+      if (!form) return;
+
+      form.addEventListener("submit", async (e) => {
+        e.preventDefault();
+        const email = qs("#login-email").value.trim();
+
+        if (!email) {
+          toast("⚠️ Please enter your email");
+          return;
+        }
+
+        try {
+          const res = await fetch(`${API_BASE}/users/login`, {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ email })
+          });
+
+          const data = await res.json();
+
+          if (!res.ok || !data.success) {
+            toast(data.message || "❌ Invalid login. Please register first.");
+            return;
+          }
+
+          // ✅ Save user to localStorage
+          localStorage.setItem("user", JSON.stringify(data.user));
+          toast("✨ Login successful! Redirecting...");
+
+          // ✅ Redirect to pets.html
+          setTimeout(() => {
+            window.location.href = "pets.html";
+          }, 1000);
+        } catch (err) {
+          console.error("Login error:", err);
+          toast("❌ Unable to connect to server.");
+        }
+      });
+    }
+
+    document.addEventListener("DOMContentLoaded", initLoginPage);
+  </script>
+</body>
+</html>

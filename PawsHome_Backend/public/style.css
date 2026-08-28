@@ -1,0 +1,105 @@
+/* style.css - derived from your App.css + basic responsive layout */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&family=Nunito:wght@400;600;700&display=swap');
+
+:root{
+  --emerald:#10b981;
+  --teal:#14b8a6;
+  --rose:#fb7185;
+  --bg1: linear-gradient(135deg,#fff7f6,#fffbeb,#ecfeff);
+  --card-shadow: 0 20px 40px rgba(16,185,129,0.08);
+}
+
+*{box-sizing:border-box}
+body{
+  margin:0;
+  font-family:'Nunito',sans-serif;
+  background:var(--bg1);
+  color:#0f172a;
+  -webkit-font-smoothing:antialiased;
+  -moz-osx-font-smoothing:grayscale;
+}
+
+/* Layout */
+.container{max-width:1200px;margin:0 auto;padding:0 20px;}
+nav{background:rgba(255,255,255,0.85);backdrop-filter:blur(10px);border-bottom:4px solid rgba(255,255,255,0.4);position:sticky;top:0;z-index:100}
+.nav-inner{display:flex;align-items:center;justify-content:space-between;height:72px;max-width:1200px;margin:0 auto;padding:0 20px}
+.brand{display:flex;align-items:center;gap:12px}
+.brand .logo{width:44px;height:44px;border-radius:10px;display:flex;align-items:center;justify-content:center;background:linear-gradient(135deg,#34d399,#06b6d4);color:white;font-weight:700;box-shadow:0 6px 18px rgba(6,182,212,0.12)}
+.brand h1{margin:0;font-size:22px;font-weight:800;background:linear-gradient(90deg,#10b981,#06b6d4,#0ea5e9);-webkit-background-clip:text;color:transparent}
+.nav-links{display:flex;gap:18px;align-items:center}
+a.btn{display:inline-block;padding:10px 16px;border-radius:999px;text-decoration:none;font-weight:700}
+.btn-primary{background:linear-gradient(90deg,#34d399,#06b6d4);color:white;box-shadow:var(--card-shadow);}
+.btn-ghost{background:transparent;color:var(--emerald);}
+
+/* Hero */
+.hero{padding:80px 0;text-align:center}
+.hero h2{font-size:44px;margin:12px 0;line-height:1.05;font-weight:800}
+.hero p{font-size:18px;color:#334155;max-width:900px;margin:0 auto}
+
+/* Cards grid */
+.grid{display:grid;grid-template-columns:repeat(1,1fr);gap:22px}
+@media(min-width:640px){.grid{grid-template-columns:repeat(2,1fr)}}
+@media(min-width:1000px){.grid{grid-template-columns:repeat(3,1fr)}}
+
+.card{background:white;border-radius:18px;overflow:hidden;box-shadow:var(--card-shadow);border:4px solid #fff;padding:0}
+.card img{width:100%;height:260px;object-fit:cover;transition:transform .35s ease,filter .25s ease}
+.card img:hover{transform:scale(1.05) rotate(2deg);filter:brightness(1.05)}
+.card .card-body{padding:18px}
+.card h3{margin:0;font-size:22px}
+.card p{margin:8px 0;color:#475569;font-weight:600}
+
+/* Filters */
+.filters{background:rgba(255,255,255,0.95);padding:18px;border-radius:16px;border:4px solid #fff;box-shadow:var(--card-shadow);margin-top:-36px}
+.filters .row{display:flex;gap:12px;align-items:center}
+.search-input{flex:1;padding:12px 14px;border-radius:12px;border:2px solid #e6edf0;font-size:15px}
+.select{padding:12px;border-radius:12px;border:2px solid #e6edf0}
+
+/* Info badges */
+.badge{display:inline-block;padding:8px 14px;border-radius:999px;font-weight:700;background:linear-gradient(90deg,#34d399,#06b6d4);color:white;border:2px solid #fff}
+
+/* Detail page */
+.detail-grid{display:grid;grid-template-columns:1fr;gap:20px;align-items:start}
+@media(min-width:900px){.detail-grid{grid-template-columns:1fr 1fr}}
+.detail-image{border-radius:18px;overflow:hidden}
+.info-cards{display:grid;grid-template-columns:repeat(2,1fr);gap:14px}
+.info-card{padding:16px;border-radius:14px;background:linear-gradient(90deg,#f0fdf4,#ecfeff);box-shadow:0 8px 24px rgba(16,185,129,0.05);border:2px solid rgba(255,255,255,0.6)}
+.adopt-btn{width:100%;padding:14px;border-radius:14px;border:none;font-weight:800}
+
+/* Dialog (simple) */
+.modal-backdrop{position:fixed;inset:0;background:rgba(2,6,23,0.45);display:flex;align-items:center;justify-content:center;z-index:300}
+.modal{background:white;padding:20px;border-radius:14px;max-width:520px;width:100%;box-shadow:0 30px 60px rgba(2,6,23,0.35)}
+.form-group{margin-bottom:12px}
+.form-group label{display:block;font-weight:700;margin-bottom:6px}
+.input,textarea{width:100%;padding:12px;border-radius:10px;border:2px solid #e6edf0;font-size:15px}
+
+/* Toast */
+.toast{position:fixed;right:20px;bottom:20px;background:#0f172a;color:white;padding:12px 16px;border-radius:10px;box-shadow:0 10px 30px rgba(2,6,23,0.35);z-index:9999;opacity:0;transform:translateY(8px);transition:all .28s ease}
+.toast.show{opacity:1;transform:translateY(0)}
+
+/* small helpers */
+.text-muted{color:#6b7280}
+.flex{display:flex}
+.flex-center{display:flex;align-items:center;justify-content:center}
+.space-between{display:flex;justify-content:space-between;align-items:center}
+.kv{font-weight:700;color:#0f172a}
+
+/* Tabs & Accordion (Care tips) */
+.tabs{display:flex;gap:8px;justify-content:center;margin-bottom:18px}
+.tab{padding:10px 14px;border-radius:12px;background:white;border:2px solid #e6edf0;cursor:pointer;font-weight:700}
+.tab.active{background:linear-gradient(90deg,#34d399,#06b6d4);color:white;border:2px solid rgba(255,255,255,0.6)}
+.accordion-item{border-top:1px solid #eef2f7;padding:12px 0}
+.accordion-title{font-weight:800;cursor:pointer}
+
+/* Admin */
+.table{display:block}
+.row-item{display:flex;justify-content:space-between;align-items:center;padding:12px;border-radius:12px;border:2px solid #f1f5f9;margin-bottom:8px;background:white}
+
+/* Footer */
+footer{padding:36px 0;text-align:center;background:linear-gradient(90deg,#0f172a,#031026);color:white;margin-top:28px}
+
+/* tiny utilities */
+.mt-8{margin-top:32px}
+.mb-8{margin-bottom:32px}
+.p-8{padding:32px}
+.small{font-size:14px}
+.center{ text-align:center }
